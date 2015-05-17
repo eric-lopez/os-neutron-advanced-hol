@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+
+  vars_files:
+    - answer_file.yml
+ 
+  roles:
+    - jumphost

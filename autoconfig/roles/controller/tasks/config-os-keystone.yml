@@ -52,6 +52,7 @@
   keystone_user:
     endpoint: "{{ keystone_admin_url }}"
     token: "{{ keystone_admin_token }}"
+    tenant: "{{ tenant_demo }}"
     user: "{{ tenant_demo_user }}"
     password: "{{ tenant_demo_password }}"
 
