@@ -14,29 +14,51 @@
   keystone_user: 
     endpoint: "{{ keystone_admin_url }}"
     token: "{{ keystone_admin_token }}" 
-    tenant: admin
+    tenant: "{{ tenant_admin }}"
     tenant_description: "Admin Tenant"
 
 - name: create admin user
   keystone_user: 
     endpoint: "{{ keystone_admin_url }}"
     token: "{{ keystone_admin_token }}" 
-    tenant: admin
-    user: admin 
+    tenant: "{{ tenant_admin }}"
+    user: "{{ tenant_admin_user }}" 
     password: "{{ tenant_admin_password }}"
 
 - name: create admin role and associate it with admin user
   keystone_user: 
     endpoint: "{{ keystone_admin_url }}"
     token: "{{ keystone_admin_token }}" 
-    tenant: admin
-    user: admin 
-    role: admin
+    tenant: "{{ tenant_admin }}"
+    user: "{{ tenant_admin_user }}" 
+    role: "{{ tenant_admin_role }}"
 
 - name: create Member role and associate it with admin user
   keystone_user: 
     endpoint: "{{ keystone_admin_url }}"
     token: "{{ keystone_admin_token }}" 
-    tenant: admin
-    user: admin 
+    tenant: "{{ tenant_admin }}"
+    user: "{{ tenant_admin_user }}" 
+    role: "{{ tenant_member_role }}"
 
+- name: create demo tenant
+  keystone_user: 
+    endpoint: "{{ keystone_admin_url }}"
+    token: "{{ keystone_admin_token }}" 
+    tenant: "{{ tenant_demo }}"
+    tenant_description: "Demo Tenant"
+
+- name: create demo user
+  keystone_user:
+    endpoint: "{{ keystone_admin_url }}"
+    token: "{{ keystone_admin_token }}"
+    user: "{{ tenant_demo_user }}"
+    password: "{{ tenant_demo_password }}"
+
+- name: associate member role with demo user
+  keystone_user:
+    endpoint: "{{ keystone_admin_url }}"
+    token: "{{ keystone_admin_token }}"
+    tenant: "{{ tenant_demo }}"
+    user: "{{ tenant_demo_user }}"
+    role: "{{ tenant_member_role }}"

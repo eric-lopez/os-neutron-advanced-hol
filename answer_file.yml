@@ -64,9 +64,15 @@ nova_admin_url: "http://{{ controllerIP }}:{{ nova_admin_port }}/v2/%(tenant_id)
 nova_public_url: "http://{{ controllerIP }}:{{ nova_internal_port }}/v2/%(tenant_id)s"
 nova_internal_url: "http://{{ controllerIP }}:{{ nova_public_port }}/v2/%(tenant_id)s"
 
+tenant_admin_role: "admin"
 tenant_admin: "admin"
 tenant_admin_user: "admin"
 tenant_admin_password: "admin"
+
+tenant_member_role: "member"
+tenant_demo: "demo"
+tenant_demo_user: "demo"
+tenant_demo_password: "demo"
 
 neutron_user: "neutron"
 neutron_user_password: "neutron"

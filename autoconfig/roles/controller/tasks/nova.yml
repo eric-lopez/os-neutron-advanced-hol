@@ -2,15 +2,17 @@
   template: src=etc/nova/nova.conf.j2 dest=/etc/nova/nova.conf
 
 - name: Perform a Nova DB sync
-  command: nova-manage db sync nova
+  command: su -s /bin/sh -c "nova-manage db sync" nova 
 
 - name: Restart Nova Services
-  service: name=nova-api state=restarted
-  service: name=nova-cert state=restarted
-  service: name=nova-consoleauth state=restarted
-  service: name=nova-scheduler state=restarted
-  service: name=nova-conductor state=restarted
-  service: name=nova-novncproxy state=restarted
+  service: name={{ item }} state=restarted
+  with_items: 
+    - nova-api 
+    - nova-cert 
+    - nova-consoleauth
+    - nova-scheduler
+    - nova-conductor
+    - nova-novncproxy
 
 - name: remove Nova SQLite DB
   file: path=/var/lib/nova/nova.sqlite state=absent
