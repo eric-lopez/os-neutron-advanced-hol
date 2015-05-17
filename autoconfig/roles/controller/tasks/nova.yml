@@ -2,7 +2,7 @@
   template: src=etc/nova/nova.conf.j2 dest=/etc/nova/nova.conf
 
 - name: Perform a Nova DB sync
-  command: nova-manage db_sync
+  command: nova-manage db sync nova
 
 - name: Restart Nova Services
   service: name=nova-api state=restarted
