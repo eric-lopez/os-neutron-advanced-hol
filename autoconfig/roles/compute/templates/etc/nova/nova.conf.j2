@@ -20,7 +20,7 @@ vnc_enabled = True
 vncserver_proxyclient_address = {{ ansible_eth0.ipv4.address }}
 novncproxy_base_url = http://{{ controllerIP }}:6080/vnc_auto.html
 
-[oslo_messageing_rabbit]
+[oslo_messaging_rabbit]
 rabbit_host = {{ rabbit_address }}
 rabbit_userid = {{ rabbit_user }}
 rabbit_password = {{ rabbit_password }}

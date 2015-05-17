@@ -19,10 +19,11 @@ my_ip = {{ ansible_eth0.ipv4.address }}
 vncserver_listen = {{ ansible_eth0.ipv4.address }}
 vncserver_proxyclient_address = {{ ansible_eth0.ipv4.address }}
 
-[oslo_messageing_rabbit]
+[oslo_messaging_rabbit]
 rabbit_host = {{ rabbit_address }}
 rabbit_userid = {{ rabbit_user }}
 rabbit_password = {{ rabbit_password }}
+rabbit_virtual_host = {{ rabbit_vhost }}
 
 [database]
 connection = mysql://{{ nova_user }}:{{ nova_db_password }}@{{ mysql_address }}/{{ nova_database }}

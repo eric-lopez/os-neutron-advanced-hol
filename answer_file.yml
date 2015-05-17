@@ -5,6 +5,7 @@ mysql_address: "10.127.1.49"
 rabbit_password: "rabbit"
 rabbit_user: "openstack"
 rabbit_address: "10.127.1.49"
+rabbit_vhost: "/openstack"
 
 keystone_admin_token: "ADMIN"
 keystone_user: "keystone"
