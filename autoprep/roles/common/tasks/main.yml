@@ -1,0 +1,35 @@
+- name: run apt-get update
+  apt: update_cache=yes
+  ignore_errors: yes
+
+- name: run apt-get upgrade
+  apt: upgrade=dist
+
+- name: install packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - ntp
+
+- name: configure NTP
+  copy: src=ntp.conf dest=/etc/ntp.conf 
+
+- name: remove ntp.conf.dhcp
+  file: path=/var/lib/ntp/ntp.conf.dhcp state=absent
+
+- name: fix boot startup
+  lineinfile: dest=/etc/default/rcS regexp='FSCKFIX' line=FSCKFIX=yes
+
+- name: allow root ssh
+  lineinfile: dest=/etc/ssh/sshd_config regexp='PermitRootLogin' line='PermitRootLogin yes'
+
+- name: fix grub tab
+  lineinfile: dest=/etc/default/grub regexp='^GRUB_RECORDFAIL_TIMEOUT' line='GRUB_RECORDFAIL_TIMEOUT=2'
+
+- name: update grub tab
+  command: /usr/sbin/update-grub
+
+- name: disable reverse dns lookup in ssh
+  lineinfile: dest=/etc/ssh/sshd_config regexp='UseDNS' line='UseDNS no'
+
+- name: restart NTP
+  command: service ntp restart

@@ -1,0 +1,13 @@
+- name: Download Cirros image
+  command: wget -P /tmp http://download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img
+- name: Upload Cirros image into glance
+  glance: 
+    name: cirros-0.3.3-x86_64 
+    file: /tmp/cirros-0.3.3-x86_64-disk.img 
+    disk_format: qcow2 
+    is_public: true 
+    user: {{ tenant_admin_user }} 
+    tenant: {{ tenant_admin }} 
+    password: {{ tenant_admin_password }} 
+    region: {{ openstack_region }} 
+    auth_url: {{ keystone_internal_url }}

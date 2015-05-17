@@ -1,0 +1,13 @@
+- name: Configure glance
+  template: src=etc/glance/glance-api.conf.j2 dest=/etc/glance/glance-api.conf
+  template: src=etc/glance/glance-registry.conf.j2 dest=/etc/glance/glance-registry.conf
+
+- name: Perform a glance DB sync
+  command: glance-manage db_sync
+
+- name: Restart Image Services
+  service: name=glance-registry state=restarted
+  service: name=glance-api state=restarted
+
+- name: remove Glance SQLite DB
+  file: path=/var/lib/glance/glance.sqlite state=absent

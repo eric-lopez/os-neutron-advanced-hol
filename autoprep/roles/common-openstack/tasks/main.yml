@@ -1,0 +1,12 @@
+- name: install cloud key ring
+  apt: name=ubuntu-cloud-keyring state=present
+
+- name: install cloud archive kilo release
+  apt_repository: repo='deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/kilo main'
+
+- name: run apt-get update
+  apt: update_cache=yes
+  ignore_errors: yes
+
+- name: run apt-get upgrade
+  apt: upgrade=dist force=yes

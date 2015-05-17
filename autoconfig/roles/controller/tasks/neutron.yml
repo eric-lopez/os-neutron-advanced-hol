@@ -1,0 +1,2 @@
+- name: remove neutron SQLite DB
+  file: path=/var/lib/neutron/neutron.sqlite state=absent
