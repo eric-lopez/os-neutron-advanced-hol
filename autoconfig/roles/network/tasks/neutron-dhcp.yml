@@ -1,5 +1,5 @@
 - name: Configure Neutron DHCP agent
-  file: src=etc/neutron/dhcp_agent.ini dest=/etc/neutron/dhcp_agent.ini
+  copy: src=etc/neutron/dhcp_agent.ini dest=/etc/neutron/dhcp_agent.ini
 
 - name: Configure DNSmasq  agent
-  file: src=etc/neutron/dnsmasq-neutron.conf dest=/etc/neutron/dnsmasq-neutron.conf
+  copy: src=etc/neutron/dnsmasq-neutron.conf dest=/etc/neutron/dnsmasq-neutron.conf
