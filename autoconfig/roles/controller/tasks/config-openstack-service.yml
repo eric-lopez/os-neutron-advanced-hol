@@ -2,3 +2,4 @@
 - include: config-os-keystone.yml
 - include: config-os-glance.yml
 - include: config-os-nova.yml
+- include: config-os-neutron.yml

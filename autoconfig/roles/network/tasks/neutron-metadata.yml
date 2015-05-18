@@ -1,0 +1,3 @@
+- name: Configure Neutron Metadata Agent
+  template: src=etc/neutron/metadata_agent.ini.j2 dest=/etc/neutron/metadata_agent.ini
+

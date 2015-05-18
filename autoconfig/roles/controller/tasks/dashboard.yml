@@ -24,8 +24,8 @@
     - apache2
 
 - name: update memcached.conf from template
-  template:
-    src: templates/etc/memcached.conf
+  copy:
+    src: etc/memcached.conf
     dest: /etc/memcached.conf
     owner: root
     group: root
@@ -33,7 +33,7 @@
 
 - name: update local_settings.py from template
   template:
-    src: templates/etc/openstack-dashboard/local_settings.py
+    src: etc/openstack-dashboard/local_settings.py.j2
     dest: /etc/openstack-dashboard/local_settings.py
     owner: root
     group: root

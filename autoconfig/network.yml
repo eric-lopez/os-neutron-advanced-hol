@@ -1,0 +1,8 @@
+---
+- hosts: network
+
+  vars_files:
+    - answer_file.yml
+ 
+  roles:
+    - network

@@ -2,7 +2,7 @@
   template: src=etc/apache2/apache2.conf.j2 dest=/etc/apache2/apache2.conf 
 
 - name: setup keystone wsgi service
-  copy: src=wsgi-keystone.conf dest=/etc/apache2/sites-available/wsgi-keystone.conf 
+  copy: src=etc/apache2/sites-available/wsgi-keystone.conf dest=/etc/apache2/sites-available/wsgi-keystone.conf 
 
 - name: disable default virtual host
   file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
@@ -14,10 +14,10 @@
   file: path=/var/www/cgi-bin/keystone state=directory
 
 - name: Install WSGI admin components
-  copy: src=wsgi-keystone.admin dest=/var/www/cgi-bin/keystone/admin
+  copy: src=var/www/cgi-bin/keystone/wsgi-keystone.admin dest=/var/www/cgi-bin/keystone/admin
 
 - name: Install WSGI main components
-  copy: src=wsgi-keystone.main dest=/var/www/cgi-bin/keystone/main
+  copy: src=var/www/cgi-bin/keystone/wsgi-keystone.main dest=/var/www/cgi-bin/keystone/main
 
 - name: Adjust ownership
   file: path=/var/www/cgi-bin/keystone/ owner={{ keystone_user }} group={{ keystone_group }} mode=0755 recurse=yes

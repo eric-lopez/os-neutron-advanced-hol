@@ -1,0 +1,2 @@
+- name: Configure Neutron ML2 Plugin
+  template: src=etc/neutron/plugins/ml2/ml2_conf.ini.j2 dest=/etc/neutron/plugins/ml2/ml2_conf.ini

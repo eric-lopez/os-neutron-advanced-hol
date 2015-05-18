@@ -1,0 +1,13 @@
+- name: Disable Default RP filtering on Node
+  inlinefile: dest=/etc/sysctl.conf regexp="^#net.ipv4.conf.default.rp_filter" insertafter="#net.ipv4.conf.default.rp_filter" line="net.ipv4.conf.default.rp_filter=0" 
+- name: Remove Default RP filtering comment 
+  inlinefile: dest=/etc/sysctl.conf regexp="^#net.ipv4.conf.default.rp_filter" state=absent
+- name: Disable all RP filtering on Node
+  inlinefile: dest=/etc/sysctl.conf regexp="^#net.ipv4.conf.all.rp_filter" insertafter="#net.ipv4.all.default.rp_filter" line="net.ipv4.conf.all.rp_filter=0" 
+- name: Remove RP filtering on comment
+  inlinefile: dest=/etc/sysctl.conf regexp="^#net.ipv4.conf.default.rp_filter" state=absent
+
+- name: Load new kernel parameters
+  command: sysctl -p
+
+

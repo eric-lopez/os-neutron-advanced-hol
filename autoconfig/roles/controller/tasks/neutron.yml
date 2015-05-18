@@ -1,2 +1,20 @@
+- name: Configure Neutron Server 
+  template: src=etc/neutron/neutron.conf.j2 dest=/etc/neutron/neutron.conf
+
+- name: Configure Neutron ML2 Plugin 
+  files: src=etc/neutron/ml2_conf.ini dest=/etc/neutron/plugins/ml2/ml2_conf.ini
+
+- name: Configure Compute to use Networking
+  template: src=etc/nova/nova-neutron.conf.j2 dest=/etc/nova/nova.conf
+
+- name: Perform a neutron DB sync
+  command: su -s /bin/sh -c "neutron-db-manage --config-file /etc/neutron/neutron.conf --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head" neutron
+
+- name: Restart Nova API service 
+  service: name=nova-api state=restarted
+
+- name: Restart Neutron Server
+  service: name=neutron-server state=restarted
+
 - name: remove neutron SQLite DB
   file: path=/var/lib/neutron/neutron.sqlite state=absent

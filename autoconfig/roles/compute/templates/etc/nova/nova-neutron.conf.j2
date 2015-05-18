@@ -1,0 +1,58 @@
+[DEFAULT]
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dhcpbridge=/usr/bin/nova-dhcpbridge
+logdir=/var/log/nova
+state_path=/var/lib/nova
+lock_path=/var/lock/nova
+force_dhcp_release=True
+libvirt_use_virtio_for_bridges=True
+verbose=True
+ec2_private_dns_show_ip=True
+api_paste_config=/etc/nova/api-paste.ini
+enabled_apis=ec2,osapi_compute,metadata
+
+auth_strategy = keystone
+
+rpc_backend = rabbit
+
+my_ip = {{ ansible_eth0.ipv4.address }}
+vnc_enabled = True
+vncserver_proxyclient_address = {{ ansible_eth0.ipv4.address }}
+novncproxy_base_url = http://{{ controllerIP }}:6080/vnc_auto.html
+
+network_api_class = nova.network.neutronv2.api.API
+security_group_api = neutron
+linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+
+[oslo_messaging_rabbit]
+rabbit_host = {{ rabbit_address }}
+rabbit_userid = {{ rabbit_user }}
+rabbit_password = {{ rabbit_password }}
+
+[keystone_authtoken]
+auth_uri = http://{{ controllerIP }}:5000
+auth_url = http://{{ controllerIP }}:35357
+auth_plugin = password
+project_domain_id = default
+user_domain_id = default
+project_name = service
+username = {{ nova_user }}
+password = {{ nova_user_password }}
+
+[glance]
+host = {{ controllerIP }}
+
+[oslo_concurrency]
+lock_path = /var/lock/nova
+
+[neutron]
+url = http://{{ controllerIP }}:9696
+auth_strategy = keystone
+admin_auth_url = http://{{ controllerIP }}:35357/v2.0
+admin_tenant_name = service
+admin_username = {{ neutron_user }}
+admin_password = {{ neutron_user_password }}
+service_metadata_proxy = True
+metadata_proxy_shared_secret = {{ metadata_proxy_shared_secret }}
+

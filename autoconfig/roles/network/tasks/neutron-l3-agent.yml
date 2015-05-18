@@ -1,0 +1,2 @@
+- name: Configure Neutron L3 agent
+  file: src=etc/neutron/l3_agent.ini dest=/etc/neutron/l3_agent.ini

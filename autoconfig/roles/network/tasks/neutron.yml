@@ -1,0 +1,2 @@
+- name: Configure Neutron
+  template: src=etc/neutron/neutron.conf.j2 dest=/etc/neutron/neutron.conf

@@ -1,0 +1,15 @@
+[DEFAULT]
+verbose = True
+
+auth_uri = http://{{ controllerIP }}:5000
+auth_url = http://{{ controllerIP }}:35357
+auth_plugin = password
+auth_region = {{ openstack_region }}
+project_domain_id = default
+user_domain_id = default
+project_name = service
+username = {{ neutron_user }}
+password = {{ neutron_user_password }}
+
+nova_metadata_ip = {{ controllerIP }} 
+metadata_proxy_shared_secret = {{ metadata_proxy_shared_secret }}
