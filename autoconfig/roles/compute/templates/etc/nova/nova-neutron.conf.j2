@@ -29,6 +29,7 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 rabbit_host = {{ rabbit_address }}
 rabbit_userid = {{ rabbit_user }}
 rabbit_password = {{ rabbit_password }}
+rabbit_virtual_host = {{ rabbit_vhost }}
 
 [keystone_authtoken]
 auth_uri = http://{{ controllerIP }}:5000
