@@ -1,8 +1,8 @@
 - name: Create OVS external bridge
-    command: ovs-vsctl add-br br-ex
+  command: ovs-vsctl add-br br-ex
 
 - name: Add interface to external bridge
-    command: ovs-vsctl add-port br-ex eth2
+  command: ovs-vsctl add-port br-ex eth2
 
 - name: Restart OVS
-    service: name=openvswitch-switch state=restarted
+  service: name=openvswitch-switch state=restarted
